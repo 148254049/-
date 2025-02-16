@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>文字修仙</title>
+    <style>
+        button { padding:10px; margin:5px; }
+    </style>
+</head>
+<body>
+    <h1>境界：<span id="level">炼气期</span></h1>
+    <p>修为：<span id="xp">0</span></p>
+    <button onclick="cultivate()">🕉️ 修炼 (+10修为)</button>
+    <button onclick="buyAuto()">🔄 购买自动修炼 (100修为)</button>
+
+    <script>
+        let xp = 0;
+        let autoLevel = 0;
+        const levels = ["炼气期","筑基期","金丹期","元婴期"];
+
+        function update() {
+            document.getElementById("xp").innerText = xp;
+            document.getElementById("level").innerText = levels[Math.floor(xp/500)];
+        }
+
+        function cultivate() {
+            xp += 10;
+            update();
+        }
+
+        function buyAuto() {
+            if(xp >= 100) {
+                xp -= 100;
+                autoLevel++;
+                setInterval(() => { xp += autoLevel; update(); }, 1000);
+                update();
+            }
+        }
+    </script>
+</body>
+</html>
